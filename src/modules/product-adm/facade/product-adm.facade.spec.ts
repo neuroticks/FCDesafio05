@@ -36,11 +36,11 @@ describe("ProductAdmFacade test", () => {
 
         const product = await ProductModel.findOne({ where: { id: "1" } });
         expect(product).toBeDefined();
-        expect(product.dataValues.id).toBe(input.id);
-        expect(product.dataValues.name).toBe(input.name);
-        expect(product.dataValues.description).toBe(input.description);
-        expect(product.dataValues.purchasePrice).toBe(input.purchasePrice);
-        expect(product.dataValues.stock).toBe(input.stock);
+        expect(product.id).toBe(input.id);
+        expect(product.name).toBe(input.name);
+        expect(product.description).toBe(input.description);
+        expect(product.purchasePrice).toBe(input.purchasePrice);
+        expect(product.stock).toBe(input.stock);
     });
 
     it("should check product stock", async () => {
