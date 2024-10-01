@@ -15,7 +15,10 @@ export default class FindClienteUseCase {
             id: l_resultFind.id.id,
             name: l_resultFind.name,
             email: l_resultFind.email,
-            address: l_resultFind.address
+            document: l_resultFind.document,
+            address: l_resultFind.address,
+            createdAt: l_resultFind.createdAt,
+            updatedAt: l_resultFind.updatedAt
         }
     }
 }

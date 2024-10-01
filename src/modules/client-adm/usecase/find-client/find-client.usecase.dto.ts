@@ -8,5 +8,8 @@ export interface FindClientUseCaseOutputDTO {
     id: string
     name: string
     email: string
+    document: string
     address: Address
+    createdAt: Date
+    updatedAt: Date
 }
