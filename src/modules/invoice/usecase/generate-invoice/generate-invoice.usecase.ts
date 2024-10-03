@@ -37,20 +37,20 @@ export default class GenerateInvoiceUseCase {
 
         const l_invoice = new Invoice(props)
 
-        const l_invoiceCreated = await this._GenerateInvoiceRepository.generate(l_invoice)
+        await this._GenerateInvoiceRepository.generate(l_invoice)
 
         return {
-            id: l_invoice.id.id, //l_invoiceCreated.id,
-            name: l_invoice.name, //l_invoiceCreated.name,
-            document: l_invoice.document, //l_invoiceCreated.document,
-            street: l_invoice.address.street, //l_invoiceCreated.street,
-            number: l_invoice.address.number, //l_invoiceCreated.number,
-            complement: l_invoice.address.complement, //l_invoiceCreated.complement,
-            city: l_invoice.address.city, //l_invoiceCreated.city,
-            state: l_invoice.address.state, //l_invoiceCreated.state,
-            zipCode: l_invoice.address.zipCode, //l_invoiceCreated.zipCode,
-            items: input.items, //l_invoiceCreated.items,
-            total: l_invoice.total(), //l_invoiceCreated.total()
+            id: l_invoice.id.id,
+            name: l_invoice.name,
+            document: l_invoice.document,
+            street: l_invoice.address.street,
+            number: l_invoice.address.number,
+            complement: l_invoice.address.complement,
+            city: l_invoice.address.city,
+            state: l_invoice.address.state,
+            zipCode: l_invoice.address.zipCode,
+            items: input.items,
+            total: l_invoice.total(),
         }
     }
 }
