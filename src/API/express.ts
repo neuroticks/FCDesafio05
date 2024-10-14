@@ -7,13 +7,14 @@ import { InvoiceModel } from "../modules/invoice/repository/invoice.model";
 import { InvoiceItemModel } from "../modules/invoice/repository/invoice-item.model";
 import { customerRoute } from "./routes/customer.route";
 import { productRoute } from "./routes/product.route";
+import { checkoutRoute } from "./routes/checkout.route";
 
 
 export const app: Express = express();
 app.use(express.json());
 app.use("/customer", customerRoute); //Post
 app.use("/product", productRoute); //Post
-//app.use("/shop", checkoutRoute) //Post
+app.use("/shop", checkoutRoute) //Post
 //app.use("/invoice", invoiceRoute) //Get:id
 
 export let sequelize: Sequelize;
