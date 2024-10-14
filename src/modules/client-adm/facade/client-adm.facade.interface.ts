@@ -5,7 +5,18 @@ export interface AddClientFacadeInputDto {
   name: string
   email: string
   document: string
-  address: Address
+  address: {
+    street: string
+    number: string
+    complement: string
+    city: string
+    state: string
+    zipCode: string
+  }
+}
+
+export interface AddClientFacadeOutputDto {
+  clientId: string
 }
 
 export interface FindClientFacadeInputDto {
@@ -23,6 +34,6 @@ export interface FindClientFacadeOutputDto {
 }
 
 export default interface ClientAdmFacadeInterface {
-  add(input: AddClientFacadeInputDto): Promise<void>;
+  add(input: AddClientFacadeInputDto): Promise<AddClientFacadeOutputDto>;
   find(input: FindClientFacadeInputDto): Promise<FindClientFacadeOutputDto>;
 }
