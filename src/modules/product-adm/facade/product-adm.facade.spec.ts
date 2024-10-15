@@ -29,6 +29,7 @@ describe("ProductAdmFacade test", () => {
             name: "Product 1",
             description: "Product 1 description",
             purchasePrice: 10,
+            salesPrice: 27,
             stock: 10,
         };
 

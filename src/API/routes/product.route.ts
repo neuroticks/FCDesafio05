@@ -11,6 +11,7 @@ productRoute.post("/", async (req: Request, res: Response) => {
       name: req.body.name,
       description: req.body.description,
       purchasePrice: req.body.purchasePrice,
+      salesPrice: req.body.salesPrice || 0,
       stock: req.body.stock,
     };
     const output = await usecase.execute(productDto);

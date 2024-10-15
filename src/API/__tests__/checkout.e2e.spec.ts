@@ -41,6 +41,7 @@ describe("E2E test for checkout", () => {
         name: 'Produto Uno',
         description: 'Produto um para teste',
         purchasePrice: 11,
+        salesPrice: 17,
         stock: 1,
       });
     expect(productOneAddResponse.status).toBe(200);
@@ -53,11 +54,13 @@ describe("E2E test for checkout", () => {
         name: 'Produto Due',
         description: 'Produto dois para teste',
         purchasePrice: 22,
+        salesPrice: 33,
         stock: 2,
       });
     expect(productTwoAddResponse.status).toBe(200);
     expect(productTwoAddResponse.body.name).toBe("Produto Due");
     expect(productTwoAddResponse.body.purchasePrice).toBe(22);
+    expect(productTwoAddResponse.body.salesPrice).toBe(33);
 
     // Checkout purchase
     const checkoutResponse = await request(app)
@@ -71,7 +74,7 @@ describe("E2E test for checkout", () => {
       });
     expect(checkoutResponse.status).toBe(200);
     expect(checkoutResponse.body.invoiceId).toBeDefined();
-    expect(checkoutResponse.body.total).toBe(33);
+    expect(checkoutResponse.body.total).toBe(50);
 
   });
 });
