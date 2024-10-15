@@ -10,6 +10,7 @@ export default class ProductRepository implements ProductGateway {
       name: product.name,
       description: product.description,
       purchasePrice: product.purchasePrice,
+      salesPrice: 0,
       stock: product.stock,
       createdAt: new Date(),
       updatedAt: new Date(),
@@ -30,9 +31,26 @@ export default class ProductRepository implements ProductGateway {
       name: product.name,
       description: product.description,
       purchasePrice: product.purchasePrice,
+      salesPrice: product.salesPrice,
       stock: product.stock,
       createdAt: product.createdAt,
       updatedAt: product.updatedAt,
+    });
+  }
+
+  async update(par_product: Product): Promise<Product> {
+
+    const result = await ProductModel.update({ salesPrice: par_product.salesPrice }, { where: { id: par_product.id.id } })
+    
+    return new Product({
+      id: par_product.id,
+      name: par_product.name,
+      description: par_product.description,
+      purchasePrice: par_product.purchasePrice,
+      salesPrice: par_product.salesPrice,
+      stock: par_product.stock,
+      createdAt: par_product.createdAt,
+      updatedAt: par_product.updatedAt,
     });
   }
 }

@@ -54,6 +54,7 @@ describe("ProductRepository test", () => {
       name: "Product 1",
       description: "Product 1 description",
       purchasePrice: 100,
+      salesPrice: 0,
       stock: 10,
       createdAt: new Date(),
       updatedAt: new Date(),
@@ -66,5 +67,32 @@ describe("ProductRepository test", () => {
     expect(product.description).toEqual("Product 1 description");
     expect(product.purchasePrice).toEqual(100);
     expect(product.stock).toEqual(10);
+  });
+
+  it("should update sales price of an existing product", async () => {
+    const productRepository = new ProductRepository();
+
+    ProductModel.create({
+      id: "1",
+      name: "Product 1",
+      description: "Product 1 description",
+      purchasePrice: 100,
+      salesPrice: 0,
+      stock: 10,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    });
+
+    const product = await productRepository.find("1");
+
+    expect(product.id.id).toEqual("1");
+    expect(product.name).toEqual("Product 1");
+
+    product.salesPrice = 15
+    const l_productUpdated = await productRepository.update(product)
+
+    expect(l_productUpdated.description).toEqual("Product 1 description");
+    expect(l_productUpdated.salesPrice).toEqual(15);
+    expect(l_productUpdated.stock).toEqual(10);
   });
 });

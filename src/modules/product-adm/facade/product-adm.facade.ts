@@ -1,19 +1,28 @@
 import UseCaseInterface from "../../@shared/usecase/usecase.interface";
-import ProductAdmFacadeInterface, { AddProductFacadeInputDto, CheckStockFacadeInputDto, CheckStockFacadeOutputDto } from "./product-adm.facade.interface";
+import ProductAdmFacadeInterface, {
+    AddProductFacadeInputDto,
+    CheckStockFacadeInputDto,
+    CheckStockFacadeOutputDto,
+    SalesPriceFacadeInputDTO,
+    SalesPriceFacadeOutputDTO
+} from "./product-adm.facade.interface";
 
 export interface UseCasesProps {
     addUseCase: UseCaseInterface;
     stockUseCase: UseCaseInterface;
+    salesPriceUseCase: UseCaseInterface;
 }
 
 export default class ProductAdmFacade implements ProductAdmFacadeInterface {
 
     private _addUsecase: UseCaseInterface;
     private _checkStockUsecase: UseCaseInterface;
+    private _salesPriceUsecase: UseCaseInterface;
 
     constructor(usecasesProps: UseCasesProps) {
         this._addUsecase = usecasesProps.addUseCase;
         this._checkStockUsecase = usecasesProps.stockUseCase;
+        this._salesPriceUsecase = usecasesProps.salesPriceUseCase;
     }
 
     // se o DTO do UseCase for diferente do DTO da Façade, precisa converter o DTO_Façade para o DTO_UseCase
@@ -24,4 +33,9 @@ export default class ProductAdmFacade implements ProductAdmFacadeInterface {
     checkStock(input: CheckStockFacadeInputDto): Promise<CheckStockFacadeOutputDto> {
         return this._checkStockUsecase.execute(input)
     }
+
+    salesPrice(input: SalesPriceFacadeInputDTO): Promise<SalesPriceFacadeOutputDTO> {
+        return this._salesPriceUsecase.execute(input)
+    }
+
 }

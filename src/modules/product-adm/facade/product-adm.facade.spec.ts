@@ -61,4 +61,27 @@ describe("ProductAdmFacade test", () => {
         expect(result.productId).toBe(input.id)
         expect(result.stock).toBe(input.stock)
     });
+
+    it("should update sales price of an existing product", async () => {
+        const productFacade = ProductAdmFacadeFactory.create()
+
+        const input = {
+            id: "1",
+            name: "Product 1",
+            description: "Product 1 description",
+            purchasePrice: 10,
+            stock: 10,
+        }
+
+        await productFacade.addProduct(input)
+
+        const l_updateInput = {
+            id: input.id,
+            salesPrice: 19
+        }
+        const l_updatedProduct = await productFacade.salesPrice(l_updateInput)
+
+        expect(l_updatedProduct.id).toBe(l_updateInput.id)
+        expect(l_updatedProduct.salesPrice).toBe(l_updateInput.salesPrice)
+    });
 });
