@@ -36,6 +36,7 @@ describe("E2E test for checkout", () => {
 
     migration = migrator(sequelize)
     await migration.up()
+    await sequelize.sync()
   })
 
   afterEach(async () => {
