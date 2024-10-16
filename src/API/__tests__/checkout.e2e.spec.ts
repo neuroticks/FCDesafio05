@@ -1,14 +1,51 @@
-import { app, sequelize } from "../express";
+import { Umzug } from "umzug";
+//import { app, sequelize } from "../express";
+import { app } from "../express";
 import request from "supertest";
+import { Sequelize } from "sequelize-typescript";
+import { ProductAdmModel } from "../../modules/product-adm/repository/product.model";
+import ProductModel from "../../modules/store-catalog/repository/product.model";
+import { migrator } from "../../migrate/config/migrator";
+import { ClientModel } from "../../modules/client-adm/repository/client.model";
+import TransactionModel from "../../modules/payment/repository/transaction.model";
+import { InvoiceModel } from "../../modules/invoice/repository/invoice.model";
+import { InvoiceItemModel } from "../../modules/invoice/repository/invoice-item.model";
 
 describe("E2E test for checkout", () => {
-  beforeEach(async () => {
-    await sequelize.sync({ force: true });
-  });
+  // beforeEach(async () => {
+  //   await sequelize.sync({ force: true });
+  // });
+  // afterAll(async () => {
+  //   await sequelize.close();
+  // });
 
-  afterAll(async () => {
-    await sequelize.close();
-  });
+  let sequelize: Sequelize
+
+  let migration: Umzug<any>;
+
+  beforeEach(async () => {
+    sequelize = new Sequelize({
+      dialect: 'sqlite',
+      storage: ":memory:",
+      logging: false
+    })
+
+    sequelize.addModels([ClientModel, ProductAdmModel,
+      ProductModel, TransactionModel, InvoiceModel,
+      InvoiceItemModel])
+
+    migration = migrator(sequelize)
+    await migration.up()
+  })
+
+  afterEach(async () => {
+    if (!migration || !sequelize) {
+      return
+    }
+    migration = migrator(sequelize)
+    await migration.down()
+    await sequelize.close()
+  })
 
   it("should create a checkout", async () => {
 

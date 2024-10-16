@@ -8,6 +8,7 @@ import { InvoiceItemModel } from "../modules/invoice/repository/invoice-item.mod
 import { customerRoute } from "./routes/customer.route";
 import { productRoute } from "./routes/product.route";
 import { checkoutRoute } from "./routes/checkout.route";
+import ProductModel from "../modules/store-catalog/repository/product.model";
 
 
 export const app: Express = express();
@@ -17,21 +18,29 @@ app.use("/product", productRoute); //Post
 app.use("/shop", checkoutRoute) //Post
 //app.use("/invoice", invoiceRoute) //Get:id
 
-export let sequelize: Sequelize;
 
-async function setupDb() {
-  sequelize = new Sequelize({
-    dialect: "sqlite",
-    storage: ":memory:",
-    logging: false,
-  });
-  await sequelize.addModels([ClientModel]);
-  await sequelize.addModels([ProductAdmModel]);
-  await sequelize.addModels([TransactionModel]);
-  await sequelize.addModels([InvoiceItemModel]);
-  await sequelize.addModels([InvoiceModel]);
 
-  await sequelize.sync();
-}
-setupDb();
+
+
+
+
+
+// export let sequelize: Sequelize;
+
+// async function setupDb() {
+//   sequelize = new Sequelize({
+//     dialect: "sqlite",
+//     storage: ":memory:",
+//     logging: false,
+//   });
+//   await sequelize.addModels([ClientModel]);
+//   await sequelize.addModels([ProductAdmModel]);
+//   await sequelize.addModels([ProductModel]);
+//   await sequelize.addModels([TransactionModel]);
+//   await sequelize.addModels([InvoiceItemModel]);
+//   await sequelize.addModels([InvoiceModel]);
+
+//   await sequelize.sync();
+// }
+//setupDb();
 
