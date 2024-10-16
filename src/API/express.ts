@@ -1,7 +1,7 @@
 import express, { Express } from "express";
 import { Sequelize } from "sequelize-typescript";
 import { ClientModel } from "../modules/client-adm/repository/client.model";
-import { ProductModel } from "../modules/product-adm/repository/product.model";
+import { ProductAdmModel } from "../modules/product-adm/repository/product.model";
 import TransactionModel from "../modules/payment/repository/transaction.model";
 import { InvoiceModel } from "../modules/invoice/repository/invoice.model";
 import { InvoiceItemModel } from "../modules/invoice/repository/invoice-item.model";
@@ -26,7 +26,7 @@ async function setupDb() {
     logging: false,
   });
   await sequelize.addModels([ClientModel]);
-  await sequelize.addModels([ProductModel]);
+  await sequelize.addModels([ProductAdmModel]);
   await sequelize.addModels([TransactionModel]);
   await sequelize.addModels([InvoiceItemModel]);
   await sequelize.addModels([InvoiceModel]);
