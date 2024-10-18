@@ -1,10 +1,22 @@
-import { app, sequelize } from "../express";
+import { Sequelize } from "sequelize-typescript";
+import { app } from "../express";
 import request from "supertest";
+import { ClientModel } from "../../modules/client-adm/repository/client.model";
 
 describe("E2E test for customer", () => {
+  let sequelize: Sequelize
+
   beforeEach(async () => {
+    sequelize = new Sequelize({
+      dialect: 'sqlite',
+      storage: ":memory:",
+      logging: false
+    })
+
+    sequelize.addModels([ClientModel])
+
     await sequelize.sync({ force: true });
-  });
+  })
 
   afterAll(async () => {
     await sequelize.close();

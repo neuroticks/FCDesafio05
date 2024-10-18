@@ -1,10 +1,22 @@
-import { app, sequelize } from "../express";
+import { Sequelize } from "sequelize-typescript";
+import { ProductAdmModel } from "../../modules/product-adm/repository/product.model";
+import { app } from "../express";
 import request from "supertest";
 
 describe("E2E test for Product", () => {
+  let sequelize: Sequelize
+
   beforeEach(async () => {
+    sequelize = new Sequelize({
+      dialect: 'sqlite',
+      storage: ":memory:",
+      logging: false
+    })
+
+    sequelize.addModels([ProductAdmModel])
+
     await sequelize.sync({ force: true });
-  });
+  })
 
   afterAll(async () => {
     await sequelize.close();
