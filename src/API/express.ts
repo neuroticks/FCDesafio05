@@ -1,14 +1,15 @@
 import express, { Express } from "express";
-import { Sequelize } from "sequelize-typescript";
-import { ClientModel } from "../modules/client-adm/repository/client.model";
-import { ProductAdmModel } from "../modules/product-adm/repository/product.model";
-import TransactionModel from "../modules/payment/repository/transaction.model";
-import { InvoiceModel } from "../modules/invoice/repository/invoice.model";
-import { InvoiceItemModel } from "../modules/invoice/repository/invoice-item.model";
+// import { Sequelize } from "sequelize-typescript";
+// import { ClientModel } from "../modules/client-adm/repository/client.model";
+// import { ProductAdmModel } from "../modules/product-adm/repository/product.model";
+// import TransactionModel from "../modules/payment/repository/transaction.model";
+// import { InvoiceModel } from "../modules/invoice/repository/invoice.model";
+// import { InvoiceItemModel } from "../modules/invoice/repository/invoice-item.model";
 import { customerRoute } from "./routes/customer.route";
 import { productRoute } from "./routes/product.route";
 import { checkoutRoute } from "./routes/checkout.route";
-import ProductModel from "../modules/store-catalog/repository/product.model";
+// import ProductModel from "../modules/store-catalog/repository/product.model";
+import { invoiceRoute } from "./routes/invoice.route";
 
 
 export const app: Express = express();
@@ -16,7 +17,7 @@ app.use(express.json());
 app.use("/customer", customerRoute); //Post
 app.use("/product", productRoute); //Post
 app.use("/shop", checkoutRoute) //Post
-//app.use("/invoice", invoiceRoute) //Get:id
+app.use("/invoice/:id", invoiceRoute) //Get:id
 
 
 
