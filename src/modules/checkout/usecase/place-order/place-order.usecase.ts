@@ -86,7 +86,7 @@ export default class PlaceOrderUseCase implements UseCaseInterface {
         if (l_orderPayment.status === "approved"){
             l_order.approve()
         }
-        this._checkout.addOrder(l_order)
+        //this._checkout.addOrder(l_order)
 
         return {
             id: l_order.id.id,
